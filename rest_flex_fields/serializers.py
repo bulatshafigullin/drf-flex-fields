@@ -93,8 +93,8 @@ class FlexFieldsSerializerMixin(object):
         sparse_fields, next_sparse_fields = split_levels(flex_options["fields"])
         omit_fields, next_omit_fields = split_levels(flex_options["omit"])
 
-        view = self.context['view']
-        fake = getattr(view, 'swagger_fake_view', False)
+        view = self.context.get('view')
+        fake = getattr(view, 'swagger_fake_view', False) if view else False
         if fake:
             expand_fields = self._expandable_fields.keys()
         
